@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Inicio</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="container">
+
+	<h3>Mis contactos</h3>
+
+	<div class="alert alert-success alert-dismissible mt-3"
+		th:if="${msgExito ne null}">
+
+		[[${msgExito}]]
+		<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+	</div>
+
+
+	<div class="text-end">
+		<a href="/nuevo" class="btn btn-primary">
+		<i class="fa fa-plus"></i> Registrar contacto 
+		 
+		 </a>
+	</div>
+
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Fecha nacimiento</th>
+				<th>celular</th>
+				<th>Email</th>
+				<th>Fecha registro</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="contacto : ${contactos}" th:object="${contacto}">
+				<td th:text="*{id}"></td>
+				<td th:text="*{nombre}"></td>
+				<td th:text="*{#temporals.format(fechaNacimiento, 'dd/MM/YYYY')}"></td>
+				<td th:text="*{celular}"></td>
+				<td th:text="*{email}"></td>
+				<td
+					th:text="*{#temporals.format(fechaRegistro, 'dd/MM/YYYY hh:mm a')}"></td>
+				<td>
+  <div class="btn-group btn-group-sm">
+    <a th:href="@{/{idContacto}/editar(idContacto=*{id})}" class="btn btn-primary">
+      <i class="fa fa-edit"></i>
+    </a> 
+    <a href="" class="btn btn-danger">
+      <i class="fa fa-trash"></i>
+    </a>
+  </div>
+</td>
+
+			</tr>
+		</tbody>
+	</table>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
+
